@@ -1,35 +1,34 @@
 {
-  "title": "Default",
-  "name": "default",
+  "title": "Odyssey Template",
+  "name": "odyssey-template",
   "version": "2.0.0",
-  "description": "Provides a simple User authentication system.",
+  "description": "Provides the default Odyssey backbone for all US states.",
+  "preview": {
+    "url": "https://formio.github.io/formio-app-formio/dist",
+    "repo": "https://github.com/formio/formio-app-formio"
+  },
   "roles": {
     "administrator": {
       "title": "Administrator",
       "description": "A role for Administrative Users.",
-      "admin": true,
-      "default": false
+      "admin": true
     },
-    "authenticated": {
-      "title": "Authenticated",
-      "description": "A role for Authenticated Users.",
-      "admin": false,
-      "default": false
+    "guardian": {
+      "title": "Guardian",
+      "description": "A role for Guardian Users."
     },
     "anonymous": {
       "title": "Anonymous",
       "description": "A role for Anonymous Users.",
-      "admin": false,
       "default": true
     }
   },
   "resources": {
-    "user": {
-      "title": "User",
+    "guardian": {
+      "title": "Guardian",
       "type": "resource",
-      "name": "user",
-      "path": "user",
-      "tags": [],
+      "name": "guardian",
+      "path": "guardian",
       "submissionAccess": [
         {
           "type": "create_all",
@@ -69,7 +68,7 @@
           "type": "read_all",
           "roles": [
             "anonymous",
-            "authenticated",
+            "guardian",
             "administrator"
           ]
         }
@@ -78,8 +77,7 @@
         {
           "type": "email",
           "persistent": true,
-          "unique": true,
-          "required": true,
+          "unique": false,
           "protected": false,
           "defaultValue": "",
           "suffix": "",
@@ -125,7 +123,6 @@
       "type": "resource",
       "name": "admin",
       "path": "admin",
-      "tags": [],
       "submissionAccess": [
         {
           "type": "create_all",
@@ -165,7 +162,7 @@
           "type": "read_all",
           "roles": [
             "anonymous",
-            "authenticated",
+            "guardian",
             "administrator"
           ]
         }
@@ -174,8 +171,7 @@
         {
           "type": "email",
           "persistent": true,
-          "unique": true,
-          "required": true,
+          "unique": false,
           "protected": false,
           "defaultValue": "",
           "suffix": "",
@@ -219,11 +215,10 @@
   },
   "forms": {
     "userLogin": {
-      "title": "User Login",
+      "title": "Admin Login",
       "type": "form",
       "name": "userLogin",
       "path": "user/login",
-      "tags": [],
       "access": [
         {
           "type": "read_all",
@@ -283,22 +278,85 @@
         }
       ]
     },
-    "userRegister": {
-      "title": "User Register",
-      "name": "userRegister",
-      "path": "user/register",
+    "guardianLogin": {
+      "title": "Guardian Login",
       "type": "form",
-      "tags": [],
+      "name": "guardianLogin",
+      "path": "guardian/login",
       "access": [
         {
           "type": "read_all",
-          "roles": ["anonymous"]
+          "roles": ["administrator"]
+        }
+      ],
+      "submissionAccess": [
+        {
+          "type" : "create_own",
+          "roles" : ["administrator"]
+        }
+      ],
+      "components": [
+        {
+          "type": "email",
+          "persistent": true,
+          "unique": false,
+          "protected": false,
+          "defaultValue": "",
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "Enter your email address",
+          "key": "email",
+          "lockKey": true,
+          "label": "Email",
+          "inputType": "email",
+          "tableView": true,
+          "input": true
+        },
+        {
+          "type": "password",
+          "persistent": true,
+          "protected": true,
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "Enter your password.",
+          "key": "password",
+          "lockKey": true,
+          "label": "Password",
+          "inputType": "password",
+          "tableView": false,
+          "input": true
+        },
+        {
+          "type": "button",
+          "theme": "primary",
+          "disableOnInvalid": true,
+          "action": "submit",
+          "block": false,
+          "rightIcon": "",
+          "leftIcon": "",
+          "size": "md",
+          "key": "submit",
+          "tableView": false,
+          "label": "Submit",
+          "input": true
+        }
+      ]
+    },
+    "guardianRegister": {
+      "title": "Guardian Register",
+      "name": "guardianRegister",
+      "path": "guardian/register",
+      "type": "form",
+      "access": [
+        {
+          "type": "read_all",
+          "roles": ["administrator"]
         }
       ],
       "submissionAccess": [
         {
           "type": "create_own",
-          "roles": ["anonymous"]
+          "roles": ["administrator"]
         }
       ],
       "components": [
@@ -346,96 +404,28 @@
           "type": "button"
         }
       ]
-    },
-    "adminLogin": {
-      "title": "Admin Login",
-      "type": "form",
-      "name": "adminLogin",
-      "path": "admin/login",
-      "tags": [],
-      "access": [
-        {
-          "type": "read_all",
-          "roles": ["anonymous"]
-        }
-      ],
-      "submissionAccess": [
-        {
-          "type" : "create_own",
-          "roles" : ["anonymous"]
-        }
-      ],
-      "components": [
-        {
-          "type": "email",
-          "persistent": true,
-          "unique": false,
-          "protected": false,
-          "defaultValue": "",
-          "suffix": "",
-          "prefix": "",
-          "placeholder": "Enter your email address",
-          "key": "email",
-          "lockKey": true,
-          "label": "Email",
-          "inputType": "email",
-          "tableView": true,
-          "input": true
-        },
-        {
-          "type": "password",
-          "persistent": true,
-          "protected": true,
-          "suffix": "",
-          "prefix": "",
-          "placeholder": "Enter your password.",
-          "key": "password",
-          "lockKey": true,
-          "label": "Password",
-          "inputType": "password",
-          "tableView": false,
-          "input": true
-        },
-        {
-          "type": "button",
-          "theme": "primary",
-          "disableOnInvalid": true,
-          "action": "submit",
-          "block": false,
-          "rightIcon": "",
-          "leftIcon": "",
-          "size": "md",
-          "key": "submit",
-          "tableView": false,
-          "label": "Submit",
-          "input": true
-        }
-      ]
     }
   },
   "actions": {
-    "user:role": {
-      "title": "Role Assignment",
-      "name": "role",
-      "priority": 1,
-      "handler": ["after"],
-      "method": ["create"],
-      "form": "user",
-      "settings": {
-        "association": "new",
-        "type": "add",
-        "role": "authenticated"
-      }
-    },
-    "user:save": {
+    "guardianSave": {
       "title": "Save Submission",
       "name": "save",
-      "form": "user",
+      "form": "guardian",
       "handler": ["before"],
       "method": ["create", "update"],
-      "priority": 10
+      "priority": 11,
+      "settings": {}
     },
-    "userLogin:login": {
+    "adminSave": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "admin",
+      "handler": ["before"],
+      "method": ["create", "update"],
+      "priority": 11,
+      "settings": {}
+    },
+    "userLogin": {
       "name": "login",
       "title": "Login",
       "form": "userLogin",
@@ -443,104 +433,64 @@
       "method": ["create"],
       "handler": ["before"],
       "settings": {
-        "resources": ["user"],
+        "resources": ["admin"],
         "username": "email",
-        "password": "password",
-        "allowedAttempts": 5,
-        "attemptWindow": 30,
-        "lockWait": 1800
+        "password": "password"
       }
     },
-    "userRegister:save": {
+    "guardianRegisterSave": {
       "title": "Save Submission",
       "name": "save",
-      "form": "userRegister",
+      "form": "guardianRegister",
       "handler": ["before"],
-      "method": ["create", "update"],
-      "priority": 11,
+      "method": ["create"],
+      "priority": 10,
       "settings": {
-        "resource": "user",
+        "resource": "guardian",
         "fields": {
           "email": "email",
           "password": "password"
         }
       }
     },
-    "userRegister:login": {
+    "guardianRegisterLogin": {
       "name": "login",
       "title": "Login",
-      "form": "userRegister",
+      "form": "guardianRegister",
       "priority": 2,
       "method": ["create"],
       "handler": ["before"],
       "settings": {
-        "resources": ["user"],
+        "resources": ["guardian"],
         "username": "email",
         "password": "password"
       }
     },
-    "admin:role": {
-      "title": "Role Assignment",
+    "guardianRole": {
       "name": "role",
+      "title": "Role Assignment",
+      "form": "guardian",
       "priority": 1,
       "handler": ["after"],
       "method": ["create"],
-      "form": "admin",
       "settings": {
-        "association": "new",
+        "role": "guardian",
         "type": "add",
-        "role": "administrator"
+        "association": "new"
       }
     },
-    "admin:save": {
-      "title": "Save Submission",
-      "name": "save",
+    "adminRole": {
+      "name": "role",
+      "title": "Role Assignment",
       "form": "admin",
-      "handler": ["before"],
-      "method": ["create", "update"],
-      "priority": 10
-    },
-    "adminLogin:login": {
-      "name": "login",
-      "title": "Login",
-      "form": "adminLogin",
-      "priority": 2,
+      "priority": 1,
+      "handler": ["after"],
       "method": ["create"],
-      "handler": ["before"],
       "settings": {
-        "resources": ["admin"],
-        "username": "email",
-        "password": "password",
-        "allowedAttempts": 5,
-        "attemptWindow": 30,
-        "lockWait": 1800
+        "role": "administrator",
+        "type": "add",
+        "association": "new"
       }
     }
-  },
-  "access": [
-    {
-      "type": "create_all",
-      "roles": [
-        "administrator"
-      ]
-    },
-    {
-      "type": "read_all",
-      "roles": [
-        "administrator"
-      ]
-    },
-    {
-      "type": "update_all",
-      "roles": [
-        "administrator"
-      ]
-    },
-    {
-      "type": "delete_all",
-      "roles": [
-        "administrator"
-      ]
-    }
-  ]
+  }
 }
