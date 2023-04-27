@@ -14,7 +14,7 @@ const cors = require('cors');
 const test = process.env.TEST_SUITE;
 const noInstall = process.env.NO_INSTALL;
 
-module.exports = function(options) {
+module.exports = function (options) {
   options = options || {};
   const q = Q.defer();
 
@@ -23,9 +23,9 @@ module.exports = function(options) {
     input: require('fs').createReadStream('logo.txt')
   });
 
-  rl.on('line', function(line) {
+  rl.on('line', function (line) {
     util.log(
-      line.substring(0,4) +
+      line.substring(0, 4) +
       line.substring(4, 30).cyan.bold +
       line.substring(30, 33) +
       line.substring(33, 42).green.bold +
@@ -33,7 +33,7 @@ module.exports = function(options) {
     );
   });
 
-  rl.on('close', function() {
+  rl.on('close', function () {
     // Print the welcome screen.
     util.log('');
     util.log(fs.readFileSync('welcome.txt').toString().green);
@@ -54,7 +54,7 @@ module.exports = function(options) {
   //cors configuration
   if (config.allowedOrigins) {
     app.use(cors({
-      origin: function(origin, callback) {
+      origin: function (origin, callback) {
         if (!origin) {
           return callback(null, true);
         }
@@ -74,9 +74,10 @@ module.exports = function(options) {
   const hooks = options.hooks || {};
 
   app.use(server.formio.middleware.restrictRequestTypes);
-  server.init(hooks).then(function(formio) {
+  server.init(hooks).then(function (formio) {
+    util.log(' *** Form.io Server Initialized');
     // Called when we are ready to start the server.
-    const start = function() {
+    const start = function () {
       // Start the application.
       if (fs.existsSync('app')) {
         const application = express();
@@ -115,7 +116,7 @@ module.exports = function(options) {
     }
 
     // See if they have any forms available.
-    formio.db.collection('forms').estimatedDocumentCount(function(err, numForms) {
+    formio.db.collection('forms').estimatedDocumentCount(function (err, numForms) {
       // If there are forms, then go ahead and start the server.
       if ((!err && numForms > 0) || test || noInstall) {
         if (!install.download && !install.extract) {
@@ -128,7 +129,7 @@ module.exports = function(options) {
       install.user = true;
 
       // Install.
-      require('./install')(formio, install, function(err) {
+      require('./install')(formio, install, function (err) {
         if (err) {
           if (err !== 'Installation canceled.') {
             return util.log(err.message);
