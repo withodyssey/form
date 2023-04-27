@@ -47,9 +47,10 @@ RUN ln -sf $NPM_PACKAGES/node_modules node_modules
 # Set this to inspect more from the application. Examples:
 #   DEBUG=formio:db (see index.js for more)
 #   DEBUG=formio:*
-ENV DEBUG=""
+ENV DEBUG=formio:*
 
 ENV NO_INSTALL=1
+EXPOSE 8080
 EXPOSE $PORT
 EXPOSE 3001
 
