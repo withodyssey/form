@@ -83,8 +83,8 @@ module.exports = function (options) {
         const application = express();
         application.use('/', express.static(path.join(__dirname, '/app/dist')));
         config.appPort = config.appPort || 8080;
-        application.listen(config.appPort);
-        const appHost = `http://localhost:${config.appPort}`;
+        application.listen(process.env.PORT || config.appPort);
+        const appHost = `http://localhost:${process.env.PORT || config.appPort}`;
         util.log(` > Serving application at ${appHost.green}`);
       }
 
