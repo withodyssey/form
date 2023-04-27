@@ -6,7 +6,7 @@
   "allowedOrigins": ["*"],
   "domain": "http://localhost:5001",
   "basePath": "",
-  "mongo": "mongodb://odysseydbuser:rdpt5zK9DDPZNRysG3@iad2-c12-2.mongo.objectrocket.com:52485,iad2-c12-1.mongo.objectrocket.com:52485,iad2-c12-0.mongo.objectrocket.com:52485/formio?replicaSet=9abb9ad30493406b9eed15c9298ab6ea",
+  "mongo": "mongodb://odysseydbuser:rdpt5zK9DDPZNRysG3@iad2-c12-2.mongo.objectrocket.com:52485,iad2-c12-1.mongo.objectrocket.com:52485,iad2-c12-0.mongo.objectrocket.com:52485/formio?replicaSet=9abb9ad30493406b9eed15c9298ab6ea&retryWrites=false",
   "mongoConfig": "",
   "mongoCA": "",
   "mongoSecret": "--- change me now ---",
