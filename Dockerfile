@@ -52,7 +52,6 @@ ENV DEBUG=""
 ENV NO_INSTALL=1
 EXPOSE $PORT
 EXPOSE 3001
-EXPOSE 8080
 
 # This will initialize the application based on
 # some questions to the user (login email, password, etc.)
