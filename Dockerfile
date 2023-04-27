@@ -49,9 +49,6 @@ RUN ln -sf $NPM_PACKAGES/node_modules node_modules
 #   DEBUG=formio:*
 ENV DEBUG=formio:*
 
-ENV NO_INSTALL=1
-EXPOSE 8080
-EXPOSE $PORT
 EXPOSE 3001
 
 # This will initialize the application based on
