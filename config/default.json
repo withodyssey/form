@@ -1,10 +1,10 @@
 {
   "port": 3001,
   "appPort": 8080,
-  "host": "localhost:3001",
+  "host": "odyssey-iowa-form-staging.herokuapp.com",
   "protocol": "http",
   "allowedOrigins": ["*"],
-  "domain": "http://localhost:3001",
+  "domain": "https://odyssey-iowa-form-staging.herokuapp.com",
   "basePath": "",
   "mongo": "mongodb://localhost:27017/medic",
   "mongoConfig": "",
