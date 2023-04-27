@@ -50,6 +50,7 @@ RUN ln -sf $NPM_PACKAGES/node_modules node_modules
 ENV DEBUG=""
 
 ENV PORT=3001
+ENV NO_INSTALL=1
 EXPOSE $PORT
 
 # This will initialize the application based on
